@@ -19,10 +19,9 @@ esp_err_t SPI::init(gpio_num_t csPin) {
 	bus_config.quadwp_io_num = -1;
 	bus_config.quadhd_io_num = -1;
 	bus_config.max_transfer_sz = 0;
-    bus_config.flags = SPICOMMON_BUSFLAG_MASTER | SPICOMMON_BUSFLAG_SCLK | SPICOMMON_BUSFLAG_MISO | SPICOMMON_BUSFLAG_MOSI;
 
     spi_device_interface_config_t dev_config;
-    dev_config.clock_speed_hz = SPI_MASTER_FREQ_8M;
+    dev_config.clock_speed_hz = 8000000;
     dev_config.mode = 0;
     dev_config.spics_io_num = csPin;
     dev_config.queue_size = 1;
@@ -35,7 +34,6 @@ esp_err_t SPI::init(gpio_num_t csPin) {
     dev_config.duty_cycle_pos = 0;
     dev_config.cs_ena_posttrans = 0;
     dev_config.cs_ena_pretrans = 0;
-    dev_config.input_delay_ns = 0;
 
     return init(bus_config, dev_config);
 }
